@@ -25,7 +25,7 @@ from defaults import IP_ADDRESS, PORT_NUM, ONTOLOGY_NAME, ONTOLOGY_LOC
 from defaults import NULL, UCO_NAMESPACE, APT_NAMESPACE, SNORT_NAMESPACE
 from defaults import OS_NAMESPACE, BRO_NAMESPACE, ATTACK_NAMESPACE
 from defaults import SLEEP_TIME
-from defaults import A, C, RULES
+from defaults import A, C, RULES, AMAP
 
 # Menu.
 OS_CHOICES = ['WINDOWS', 'UNIX']
@@ -34,7 +34,7 @@ OS_CHOICES = ['WINDOWS', 'UNIX']
 @click.option('--ip', type=str, default='10.0.2.15')
 def monitor(os, ip):
     interface = Antecedent(ONTOLOGY_LOC)
-    model = BayesNetwork(A, C, RULES)
+    model = BayesNetwork(A, C, RULES, AMAP)
     status_writer = AntecStatusWriter(os, ip, ATTACK_NAMESPACE, ONTOLOGY_LOC)
 
     # Monitor in a loop.

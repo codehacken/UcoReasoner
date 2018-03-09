@@ -65,6 +65,39 @@ A = {
     "a30": "?tmac uco_attack:hasProtocol ?prot",
 }
 
+AMAP = {
+    "a1": "Get Class",
+    "a2": "Get Subclasses",
+    "a3": "Finding Attack Type-1",
+    "a4": "Finding Attack Machine",
+    "a5": "Attack Reconnaisance Stage",
+    "a6": "Attack Exploit Stage",
+    "a7": "Attacker Maintaing Access",
+    "a8": "Malicious Activity Stage",
+    "a9": "Attack Activity Located",
+    "a10": "Find Attack Activity",
+    "a11": "Exploit Observation-1",
+    "a12": "Reconnaisance Observation-1",
+    "a13": "Malicious Activity Observation",
+    "a14": "Finding Attack Type-2",
+    "a15": "Inherit Generic Attack Properties",
+    "a16": "Generic Attack",
+    "a17": "Exploit Observation-2",
+    "a18": "Maintain Access Observation",
+    "a19": "Reconnaisance Observation-2",
+    "a20": "a20",
+    "a21": "a21",
+    "a22": "File Execution",
+    "a23": "a23",
+    "a24": "a24",
+    "a25": "File Download Stage",
+    "a26": "a26",
+    "a27": "a27",
+    "a28": "a28",
+    "a29": "Use Suspicious Protocol",
+    "a30": "a30",
+}
+
 # List of all consequents.
 C = {
     "c1": "?ob rdf:type ?supcl",

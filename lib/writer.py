@@ -33,17 +33,19 @@ class AntecStatusWriter():
         # Create a RDF Graph to write.
         g = Graph()
         for antec in status:
+            # Add the Machine.
+            antec_event = self._attack_ns_instance["ANT_" + antec.replace(" ", "_")]
+
+            # Register the antecdent.
+            g.add((antec_event, RDF.type, OWL.NamedIndividual))
+
             if (status[antec] > 0.0):
-                # Add the Machine.
-                antec_event = self._attack_ns_instance["ANT_" + antec]
-
-                # Register the antecdent.
-                g.add((antec_event, RDF.type, OWL.NamedIndividual))
-
-                # Associate the machine with an IP.
                 g.add((antec_event, self._attack_ns.hasPredictedStatus,
                        Literal(True, datatype=XSD.boolean)))
-                # Literal('1', datatype=XSD.float) (probability)
+            else:
+                g.add((antec_event, self._attack_ns.hasPredictedStatus,
+                       Literal(False, datatype=XSD.boolean)))
+            # Literal('1', datatype=XSD.float) (probability)
 
         if(filetype == "JENA"):
             j_log.insert(g.serialize(format='nt'))

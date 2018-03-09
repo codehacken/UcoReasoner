@@ -11,10 +11,11 @@ class BayesNetwork(object):
     """
     Construct a naive bayes model for each for the antecedents.
     """
-    def __init__(self, A, C, rules):
+    def __init__(self, A, C, rules, amap):
         self._A = A
         self._num_antecs = len(self._A)
         self._rev_A = {}
+        self._amap = amap
 
         # Construct the reverse index for the antecedent list.
         for idx, antec in enumerate(self._A):
@@ -63,6 +64,8 @@ class BayesNetwork(object):
             column_id = self._rev_A[antec]
             if(x[:, column_id] == 0):
                 new_x = np.delete(x, column_id, axis=1)
-                results[antec] = float(self._model[antec].predict(new_x)[0])
+                results[self._amap[antec]] = float(self._model[antec].predict(new_x)[0])
+            else:
+                results[self._amap[antec]] = 0.0
 
         return results
