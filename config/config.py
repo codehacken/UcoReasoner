@@ -28,6 +28,7 @@ ATTACK_NAMESPACE = "http://www.accl.umbc.edu/attack"
 
 # Reasoner configuration.
 SLEEP_TIME = 1
+NULL = 'unk'
 
 # NOTE: Add the set of rules.
 # List all the antecedents.

@@ -3,8 +3,7 @@ Create a database connector to run queries for different alerts.
 AUTHOR: Ashwinkumar Ganesan.
 """
 from SPARQLWrapper import SPARQLWrapper, JSON
-from urllib.request import urlopen
-from urllib.error import URLError
+import urllib2
 
 class DatabaseConnector():
     def __init__(self, ontology_loc):
@@ -34,6 +33,18 @@ class DatabaseConnector():
             PREFIX os_instances: <http://sec.accl.umbc.edu/os/ns/ontology/instances#>
         """
 
+class Log(DatabaseConnector):
+    def insert(self, data):
+        try:
+            # print(data)
+            query_string = self._prefix + """INSERT DATA {""" + \
+                           data + """}"""
+            self._sparql['update'].setQuery(query_string)
+            results = self._sparql['update'].query().convert()
+        except urllib2.URLError:
+            print("Unable to connect to database.")
+            return None
+
 class Antecedent(DatabaseConnector):
     """
     Class Antecedent maintains the database connector and the
@@ -51,7 +62,7 @@ class Antecedent(DatabaseConnector):
             query_string, subject = self._get_query(a)
             self._sparql['query'].setQuery(query_string)
             results = self._sparql['query'].query().convert()
-        except URLError:
+        except urllib2.URLError:
             print("Unable to connect to database.")
             return None
 

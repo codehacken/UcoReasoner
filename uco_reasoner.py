@@ -17,10 +17,13 @@ import time
 from lib.database import Antecedent
 from lib.menu import reasoner_menu
 from lib.model import BayesNetwork
+from lib.writer import AntecStatusWriter
 
 args = reasoner_menu()
 defaults = imp.load_source('defaults', args['config'])
 from defaults import IP_ADDRESS, PORT_NUM, ONTOLOGY_NAME, ONTOLOGY_LOC
+from defaults import NULL, UCO_NAMESPACE, APT_NAMESPACE, SNORT_NAMESPACE
+from defaults import OS_NAMESPACE, BRO_NAMESPACE, ATTACK_NAMESPACE
 from defaults import SLEEP_TIME
 from defaults import A, C, RULES
 
@@ -32,6 +35,7 @@ OS_CHOICES = ['WINDOWS', 'UNIX']
 def monitor(os, ip):
     interface = Antecedent(ONTOLOGY_LOC)
     model = BayesNetwork(A, C, RULES)
+    status_writer = AntecStatusWriter(os, ip, ATTACK_NAMESPACE, ONTOLOGY_LOC)
 
     # Monitor in a loop.
     while(True):
@@ -45,8 +49,8 @@ def monitor(os, ip):
         for antec in results:
             if (results[antec] > 0.0):
                 output += " {}: {}".format(antec, results[antec])
-
         print(output)
+        status_writer.toRDF(results)
 
         # Stop polling.
         time.sleep(SLEEP_TIME)
