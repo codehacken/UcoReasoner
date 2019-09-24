@@ -23,6 +23,7 @@ SNORT_NAMESPACE = "http://ffrdc.ebiquity.umbc.edu/uco/ns/ontology/snort"
 BRO_NAMESPACE = "http://ffrdc.ebiquity.umbc.edu/uco/ns/ontology/bro"
 OS_NAMESPACE = "http://sec.accl.umbc.edu/os/ns/ontology"
 
+
 # NOTE: This is temporary.
 ATTACK_NAMESPACE = "http://www.accl.umbc.edu/attack"
 
